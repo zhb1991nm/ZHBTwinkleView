@@ -17,6 +17,7 @@
 		B1B360BC1B5389C100BEB5EE /* ZHBTwinkleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B360BB1B5389C100BEB5EE /* ZHBTwinkleView.m */; };
 		B1B360C01B538CF700BEB5EE /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B360BF1B538CF600BEB5EE /* RTLabel.m */; };
 		B1B361151B53B9BF00BEB5EE /* twinkle.gif in Resources */ = {isa = PBXBuildFile; fileRef = B1B361141B53B9BF00BEB5EE /* twinkle.gif */; };
+		B1B361171B53BACA00BEB5EE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B1B361161B53BACA00BEB5EE /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		B1B360BE1B538CF600BEB5EE /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
 		B1B360BF1B538CF600BEB5EE /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
 		B1B361141B53B9BF00BEB5EE /* twinkle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = twinkle.gif; path = ../../twinkle.gif; sourceTree = "<group>"; };
+		B1B361161B53BACA00BEB5EE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		B1B360921B53897B00BEB5EE /* ZHBTwinkleViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B1B361161B53BACA00BEB5EE /* README.md */,
 				B1B361141B53B9BF00BEB5EE /* twinkle.gif */,
 				B1B360BD1B538CF600BEB5EE /* RTLabel */,
 				B1B360B91B5389A400BEB5EE /* ZHBTwinkleView */,
@@ -249,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1B361171B53BACA00BEB5EE /* README.md in Sources */,
 				B1B360C01B538CF700BEB5EE /* RTLabel.m in Sources */,
 				B1B360BC1B5389C100BEB5EE /* ZHBTwinkleView.m in Sources */,
 				B1B3609C1B53897B00BEB5EE /* ViewController.m in Sources */,
