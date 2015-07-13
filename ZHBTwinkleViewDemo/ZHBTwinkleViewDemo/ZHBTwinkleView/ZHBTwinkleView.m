@@ -19,6 +19,8 @@ static  NSString const * ZHBTwinkleViewAnimationGroupKey = @"ZHBTwinkleViewAnima
 
 @property (nonatomic,weak) ZHBTwinkleViewCell *currentCell;
 
+@property (nonatomic,assign) NSInteger repeatedTimes;
+
 
 @end
 
@@ -31,6 +33,7 @@ static  NSString const * ZHBTwinkleViewAnimationGroupKey = @"ZHBTwinkleViewAnima
     if (self) {
         self.cycleTimeInterval = 5.0f;
         self.fadeTimeInterval = 0.4f;
+        self.repeatTimes = 1;
         reuseDict = [NSMutableDictionary dictionaryWithCapacity:10];
     }
     return self;
@@ -45,6 +48,7 @@ static  NSString const * ZHBTwinkleViewAnimationGroupKey = @"ZHBTwinkleViewAnima
 }
 
 -(void)reloadData{
+    self.repeatedTimes = 0;
     self.index = 0;
     self.count = 0;
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfRowsInZHBTwinkleView:)]) {
@@ -72,17 +76,18 @@ static  NSString const * ZHBTwinkleViewAnimationGroupKey = @"ZHBTwinkleViewAnima
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(ZHBTwinkleView:twinkleViewcellAtIndex:)] && self.index < self.count) {
-        ZHBTwinkleViewCell *cell = [self.dataSource ZHBTwinkleView:self twinkleViewcellAtIndex:_index];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(ZHBTwinkleView:twinkleViewcellAtIndex:)] && self.index < self.count * self.repeatTimes) {
+        NSInteger dataIndex = self.index%self.count;
+        ZHBTwinkleViewCell *cell = [self.dataSource ZHBTwinkleView:self twinkleViewcellAtIndex:dataIndex];
         cell.frame = self.bounds;
         cell.twinkleView = self;
-        cell.index = _index;
+        cell.index = dataIndex;
         [reuseDict setObject:cell forKey:cell.reuseIdentifier];
         [self addSubview:cell];
         [cell layoutSubviews];
         cell.contentView.alpha = 0.0;
         CAAnimationGroup *animationGroup = [self animationGroupWithDuration:self.cycleTimeInterval repeatCount:1];
-        if (_index != _count - 1) {
+        if (self.index != self.count * self.repeatTimes *  - 1) {
             animationGroup.animations = @[[self animationWithOpacityFrom:0.0 To:1.0 Duration:self.fadeTimeInterval BeginTime:0],
                                           [self animationWithOpacityFrom:1.0 To:1.0 Duration:self.cycleTimeInterval - self.fadeTimeInterval*2  BeginTime:self.fadeTimeInterval],
                                           [self animationWithOpacityFrom:1.0 To:0.0 Duration:self.fadeTimeInterval BeginTime:self.cycleTimeInterval - self.fadeTimeInterval]];
@@ -112,11 +117,15 @@ static  NSString const * ZHBTwinkleViewAnimationGroupKey = @"ZHBTwinkleViewAnima
         return;
     }
     [_currentCell.contentView.layer removeAnimationForKey:[ZHBTwinkleViewAnimationGroupKey copy]];
-    if (self.index + 1 == self.count) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(didTwinkleToLastIndex:)]) {
-            [self.delegate didTwinkleToLastIndex:self];
+    if (self.index < self.count * self.repeatTimes){
+        if (self.index%self.count == self.count - 1) {
+            self.repeatedTimes ++;
+            if (self.repeatedTimes == self.repeatTimes) {
+                if (self.delegate && [self.delegate respondsToSelector:@selector(didTwinkleToLastIndex:)]) {
+                    [self.delegate didTwinkleToLastIndex:self];
+                }
+            }
         }
-    }else{
         self.index ++;
         [self updateContent];
     }

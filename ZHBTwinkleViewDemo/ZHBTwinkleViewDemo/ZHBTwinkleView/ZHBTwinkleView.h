@@ -37,6 +37,8 @@
 
 @property (nonatomic, assign) NSTimeInterval fadeTimeInterval;//透明度动画时长
 
+@property (nonatomic, assign) NSInteger repeatTimes;//default = 1;
+
 
 - (id)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 

@@ -76,6 +76,9 @@ CGPoint CGRectGetCenter(CGRect rect)
     if (!_twinkleView) {
         _twinkleView = [[ZHBTwinkleView alloc] initWithFrame:CGRectMake(50, 0, self.view.bounds.size.width - 100, 20)];
         _twinkleView.backgroundColor = [UIColor clearColor];
+        _twinkleView.cycleTimeInterval = 1.0f;
+        _twinkleView.fadeTimeInterval = 0.3f;
+        _twinkleView.repeatTimes = NSIntegerMax;
         _twinkleView.dataSource = self;
         _twinkleView.delegate = self;
     }
